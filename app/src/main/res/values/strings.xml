@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">I18NDemo</string>
+    <!--<string name="facebook_app_id">569265446847413</string>
+    <string name="fb_login_protocol_scheme">fb569265446847413</string>-->
+
+    <!--i微影test-->
+    <string name="facebook_app_id">411775176294507</string>
+    <string name="fb_login_protocol_scheme">fb411775176294507</string>
+
+    <!--i微影-->
+    <!--<string name="facebook_app_id">349375068976328</string>
+    <string name="fb_login_protocol_scheme">fb349375068976328</string>-->
+</resources>
