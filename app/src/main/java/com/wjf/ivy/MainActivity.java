@@ -2,6 +2,7 @@ package com.wjf.ivy;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
         loginButton.setReadPermissions("email", "public_profile", "user_friends");
 
+        //测试热更新
+        BugClass bugClass = new BugClass();
+        new AlertDialog.Builder(MainActivity.this).setMessage(bugClass.bug()).show();
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
         if (isLoggedIn){
