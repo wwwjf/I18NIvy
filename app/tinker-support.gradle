@@ -6,6 +6,8 @@ def bakPath = file("${buildDir}/bakApk/")
  * 此处填写每次构建生成的基准包目录
  */
 def baseApkDir = "app-0115-16-58-46"
+def tinkerId = "base-" + android.defaultConfig.versionName // 用于生成基准包（不用修改）
+//def myTinkerId = "patch-" + rootProject.ext.android.versionName + ".0.0" // 用于生成补丁包（每次生成补丁包都要修改一次，最好是 patch-${versionName}.x.x）
 
 /**
  * 对于插件各参数的详细解析请参考
@@ -23,7 +25,7 @@ tinkerSupport {
 
     // 是否启用覆盖tinkerPatch配置功能，默认值false
     // 开启后tinkerPatch配置不生效，即无需添加tinkerPatch
-    overrideTinkerPatchConfiguration = true
+    overrideTinkerPatchConfiguration = false
 
     // 编译补丁包时，必需指定基线版本的apk，默认值为空
     // 如果为空，则表示不是进行补丁包的编译
@@ -40,7 +42,7 @@ tinkerSupport {
 //    baseApkResourceMapping = "${bakPath}/${baseApkDir}/app-debug-R.txt"
 
     // 构建基准包跟补丁包都要修改tinkerId，主要用于区分
-    tinkerId = "1.1.0-hotfix"
+    tinkerId = "${tinkerId}"
 
     // 打多渠道补丁时指定目录
     // buildAllFlavorsDir = "${bakPath}/${baseApkDir}"
@@ -89,7 +91,7 @@ tinkerPatch {
     }
     buildConfig {
         keepDexApply = false
-        tinkerId = "1.1.0-hotfix"
+        tinkerId = "${tinkerId}"
         applyMapping = "${bakPath}/${baseApkDir}/app-release-mapping.txt" //  可选，设置mapping文件，建议保持旧apk的proguard混淆方式
         applyResourceMapping = "${bakPath}/${baseApkDir}/app-release-R.txt" // 可选，设置R.txt文件，通过旧apk文件保持ResId的分配
     }
