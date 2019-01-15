@@ -5,7 +5,7 @@ def bakPath = file("${buildDir}/bakApk/")
 /**
  * 此处填写每次构建生成的基准包目录
  */
-def baseApkDir = "app-0114-19-01-14"
+def baseApkDir = "app-0115-16-58-46"
 
 /**
  * 对于插件各参数的详细解析请参考
@@ -40,7 +40,7 @@ tinkerSupport {
 //    baseApkResourceMapping = "${bakPath}/${baseApkDir}/app-debug-R.txt"
 
     // 构建基准包跟补丁包都要修改tinkerId，主要用于区分
-//    tinkerId = "1.0.3-ccc"
+    tinkerId = "1.1.0-hotfix"
 
     // 打多渠道补丁时指定目录
     // buildAllFlavorsDir = "${bakPath}/${baseApkDir}"
@@ -49,7 +49,7 @@ tinkerSupport {
     // isProtectedApp = true
 
     // 是否采用反射Application的方式集成，无须改造Application
-    enableProxyApplication = true
+    enableProxyApplication = false
 
     // 支持新增Activity
     supportHotplugComponent = true
@@ -62,9 +62,10 @@ tinkerSupport {
  * https://github.com/Tencent/tinker/wiki/Tinker-%E6%8E%A5%E5%85%A5%E6%8C%87%E5%8D%97
  */
 tinkerPatch {
+    oldApk ="${bakPath}/${baseApkDir}/app-release.apk"
     tinkerEnable = true
     ignoreWarning = false
-    useSign = false
+    useSign = true
     dex {
         dexMode = "jar"
         pattern = ["classes*.dex"]
@@ -88,6 +89,8 @@ tinkerPatch {
     }
     buildConfig {
         keepDexApply = false
-//      tinkerId = "base-2.0.1"
+        tinkerId = "1.1.0-hotfix"
+        applyMapping = "${bakPath}/${baseApkDir}/app-release-mapping.txt" //  可选，设置mapping文件，建议保持旧apk的proguard混淆方式
+        applyResourceMapping = "${bakPath}/${baseApkDir}/app-release-R.txt" // 可选，设置R.txt文件，通过旧apk文件保持ResId的分配
     }
 }

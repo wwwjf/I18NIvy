@@ -17,6 +17,7 @@ import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 import java.util.List;
 
@@ -43,9 +44,12 @@ public class MapActivity extends AppCompatActivity implements PermissionsListene
                 .zoom(9)
                 .build());
 
-        mapView.getMapAsync(mapboxMap -> {
-            this.mapboxMap = mapboxMap;
-            enableLocationComponent();
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(MapboxMap mapboxMap) {
+                MapActivity.this.mapboxMap = mapboxMap;
+                MapActivity.this.enableLocationComponent();
+            }
         });
     }
 

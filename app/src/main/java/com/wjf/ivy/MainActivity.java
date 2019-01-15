@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,17 +38,30 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_button);
         mTvInfo = findViewById(R.id.tv_info);
 
-        findViewById(R.id.login_button).setOnClickListener(v -> {
-            Toast.makeText(this, "登录", Toast.LENGTH_SHORT).show();
+        findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "登录", Toast.LENGTH_SHORT).show();
+            }
         });
-        findViewById(R.id.btn_map).setOnClickListener(v ->
-                startActivity(new Intent(MainActivity.this, MapActivity.class)));
+        findViewById(R.id.btn_map).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.startActivity(new Intent(MainActivity.this, MapActivity.class));
+            }
+        });
 
-        findViewById(R.id.btn_copy).setOnClickListener(v -> {
-            ClipboardUtil.copy(mTvInfo.getText().toString(),MainActivity.this);
+        findViewById(R.id.btn_copy).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardUtil.copy(mTvInfo.getText().toString(), MainActivity.this);
+            }
         });
-        findViewById(R.id.btn_paste).setOnClickListener(v -> {
-            Toast.makeText(MainActivity.this, ClipboardUtil.paste(MainActivity.this), Toast.LENGTH_SHORT).show();
+        findViewById(R.id.btn_paste).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, ClipboardUtil.paste(MainActivity.this), Toast.LENGTH_SHORT).show();
+            }
         });
         callbackManager = CallbackManager.Factory.create();
         loginButton.setReadPermissions("email", "public_profile", "user_friends");

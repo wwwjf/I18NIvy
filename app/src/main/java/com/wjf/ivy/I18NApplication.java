@@ -1,17 +1,12 @@
 package com.wjf.ivy;
 
-import android.app.Application;
+import com.tencent.tinker.loader.app.TinkerApplication;
+import com.tencent.tinker.loader.shareutil.ShareConstants;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
-public class I18NApplication extends Application {
-
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        FacebookSdk.sdkInitialize(this);
-        AppEventsLogger.activateApp(this);
+public class I18NApplication extends TinkerApplication {
+    public I18NApplication() {
+        super(ShareConstants.TINKER_ENABLE_ALL, "com.wjf.ivy.I18NApplicationLike",
+                "com.tencent.tinker.loader.TinkerLoader", false);
     }
+
 }
